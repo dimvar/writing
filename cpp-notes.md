@@ -73,19 +73,26 @@ When you see string literals in a C++ program, those are all C strings! To avoid
 copies, when declaring a function that takes a string, make it take
 `absl::string_view` instead of `const string&`.
 
-### Casting
+### Casting, RTTI
 
 New syntax for casting. Don't use C-style casts:  
 `static_cast <new_type> (expression)`
 
-The closest thing to Java's instanceof in C++ is dynamic_cast. For example, to
-cast a type `Foo*` to `Bar*` you do:
+Runtime type information (RTTI) is the C++ feature that enables us to query the
+types of values at runtme.
+
+In non-polymorphic code, we can use `typeid` to query the type of a value; it
+returns an object of type `std::type_info`.  
+`typeid(123).name()` prints `int`.
+
+In code using inheritance, the closest thing to Java's instanceof in C++ is
+dynamic_cast. For example, to cast a type `Foo*` to `Bar*` you do:
 ```
 if (Bar* y = dynamic_cast<Bar*>(x)) {
    y->SomeBarMethod();
 }
 ```
-Note that dynamic_cast is much more limited than instanceof. The from type needs
+Note that dynamic_cast is more limited than instanceof. The from type needs
 to be a pointer (or reference) to a class with a virtual method. You can't use
 arbitrary types, e.g., you can't use void* as the from type.
 
