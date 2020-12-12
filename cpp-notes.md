@@ -210,6 +210,7 @@ address and grows upward.
 It is unlikely
 ([but not impossible](https://stackoverflow.com/questions/1334055/what-happens-when-stack-and-heap-collide/1335389#1335389))
 that the heap grows into the stack.
+
 If I remember correctly, the virtual address space of a process has the same size
 as all the RAM available in the machine; the program thinks that's how much mem
 it can use.
