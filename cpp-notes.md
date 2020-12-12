@@ -233,9 +233,9 @@ map X to Y using table lookups (runs slower but is more flexible).
 
 At compile time, ASan creates poisoned redzones around stack and global data.
 At runtime, it creates poisoned redzones around heap data.
-The addresses returned by malloc are aligned (usually to 8 bytes). This
-determines the minimum size of the redzones, and also the amount of compactness
-of the shadow mem (1/8th of the virtual address space).
+The addresses returned by the memory allocator are aligned (usually to 8 bytes).
+The alignment determines the minimum size of the redzones, and also the amount
+of compactness of the shadow mem (1/8th of the virtual address space).
 
 For every byte, ASan records in shadow mem whether the byte is addressable or
 not. If the byte is not addressable, ASan also knows if the byte corresponds to
@@ -255,7 +255,7 @@ been reallocated, then the bug won't be detected.
 ASan is part of LLVM.
 Its instrumentation happens right after LLVM optimizations, so it doesn't have
 to instrument accesses that are optimized away.
-Since the instrumentation is before register allocaction, ASan doesn't
+Since the instrumentation is before register allocation, ASan doesn't
 instrument accesses due to register spills.
 
 ASan uses shadow memory very efficiently, which allows it to find bugs with
