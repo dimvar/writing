@@ -181,6 +181,43 @@ Shared_ptr: a reference-counted smart pointer.
 Weak_ptr: provides access to an object that is owned by one or more shared_ptr
 instances, but does not participate in reference counting.
 
+### Memory management
+
+A memory allocator such as malloc is responsible for allocating and freeing
+memory.
+
+A segmentation fault (segfault) happens when a program attempts to read/write
+memory that doesn't belong to it, or attempts to write to read-only memory.
+Common ways to segfault are use-after-free, null pointer dereference, and
+accessing past the end of an array.
+
+When memory is freed, the allocator doesn't return the memory to the OS; it puts
+the freed block into a free list.
+When it receives allocation requests in the future, it tries to use blocks from
+the free list.
+First, this means that you can't easily tell what the mem usage of a program is
+by looking at the mem usage of the process; this includes the free list.
+Second, if you have a pointer `Foo*` and the object becomes dead but the
+memory is reused, and then you use the pointer, you are silently accessing
+garbage data.
+This is a case of use-after-free.
+(The more common one is to try to access mem that is still in the free list, and
+get a segfault.)
+
+Reminder that in the memory layout of a Linux process, the stack segment starts
+at a high address and grows downward, and the heap segment starts at a low
+address and grows upward.
+It is unlikely
+([but not impossible](https://stackoverflow.com/questions/1334055/what-happens-when-stack-and-heap-collide/1335389#1335389))
+that the heap grows into the stack.
+If I remember correctly, the virtual address space of a process has the same size
+as all the RAM available in the machine; the program thinks that's how much mem
+it can use.
+
+TODO:  
+Read the [asan paper](https://www.usenix.org/system/files/conference/atc12/atc12-final39.pdf)
+and the [msan paper](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/43308.pdf).
+
 ### Classes
 
 Classes are very different from Java; can't describe the differences succinctly.
