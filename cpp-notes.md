@@ -181,7 +181,7 @@ Shared_ptr: a reference-counted smart pointer.
 Weak_ptr: provides access to an object that is owned by one or more shared_ptr
 instances, but does not participate in reference counting.
 
-### Memory management
+### Manual memory management
 
 A memory allocator such as malloc is responsible for allocating and freeing
 memory.
@@ -215,9 +215,57 @@ If I remember correctly, the virtual address space of a process has the same siz
 as all the RAM available in the machine; the program thinks that's how much mem
 it can use.
 
-TODO:  
-Read the [asan paper](https://www.usenix.org/system/files/conference/atc12/atc12-final39.pdf)
-and the [msan paper](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/43308.pdf).
+#### Address sanitizer (ASan)
+
+ASan is a great tool that finds memory bugs at runtime, such as use-after-free
+and out-of-bounds accesses.
+
+At compile time, ASan instruments memory accesses in the code, and at runtime it
+checks if the access is legit, by using shadow memory.
+ASan uses a custom allocator instead of malloc.
+
+Shadow memory is memory allocated by the program such that every ordinary
+application address X has a corresponding shadow address Y, where metadata about
+X can be stored.
+You can map X to Y by a direct scale and offset, in which case the whole
+application address space is mapped to a single shadow address space, or you can
+map X to Y using table lookups (runs slower but is more flexible).
+
+At compile time, ASan creates poisoned redzones around stack and global data.
+At runtime, it creates poisoned redzones around heap data.
+The addresses returned by malloc are aligned (usually to 8 bytes). This
+determines the minimum size of the redzones, and also the amount of compactness
+of the shadow mem (1/8th of the virtual address space).
+
+For every byte, ASan records in shadow mem whether the byte is addressable or
+not. If the byte is not addressable, ASan also knows if the byte corresponds to
+a stack redzone, heap redzone, global redzone, or freed mem.
+At every memory access, ASan checks the shadow state for that address, and
+reports an error if the access is illegal.
+
+The size of the redzone is somewhere between 32 and 128 bytes. If an access
+underflows or overflows by more than that, the error will not be detected.
+
+The custom allocator picks blocks from the free list in FIFO order, so that each
+free block will stay free for as long as possible.
+This allows ASan to find use-after-free errors.
+Of course, if the use-after-free happens way later, when the freed block has
+been reallocated, then the bug won't be detected.
+
+ASan is part of LLVM.
+Its instrumentation happens right after LLVM optimizations, so it doesn't have
+to instrument accesses that are optimized away.
+Since the instrumentation is before register allocaction, ASan doesn't
+instrument accesses due to register spills.
+
+ASan uses shadow memory very efficiently, which allows it to find bugs with
+significantly less overhead than previous state-of-the-art tools.
+
+For more details, see the paper at Usenix 2012
+["AddressSanitizer: A Fast Address Sanity Checker"](https://www.usenix.org/system/files/conference/atc12/atc12-final39.pdf).
+
+TODO: read the [msan paper](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/43308.pdf).
+MSan is a tool that finds use-of-uninitialized-memory bugs.
 
 ### Classes
 
