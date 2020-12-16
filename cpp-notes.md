@@ -391,8 +391,11 @@ immediately), the latter isn't, and you may lose some prints this way.
 
 Easiest way to turn a vector v to a string is `absl::StrJoin(v, " ")`.
 
-## Learning TODOs
+### Learning TODOs
 
 Learn more about [macros](https://gcc.gnu.org/onlinedocs/gcc-4.8.5/cpp/Macros.html#Macros).
+
+[This series of posts](https://lwn.net/Articles/276782/) by Ian Lance Taylor is
+a good description of linkers.
 
 
