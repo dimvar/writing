@@ -73,6 +73,13 @@ When you see string literals in a C++ program, those are all C strings! To avoid
 copies, when declaring a function that takes a string, make it take
 `absl::string_view` instead of `const string&`.
 
+To check if a string contains a substring, do:
+```c++
+if (str.find(some_substr) != std::string::npos) {
+  // stuff
+}
+```
+
 ### Casting, RTTI
 
 New syntax for casting. Don't use C-style casts:  
