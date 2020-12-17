@@ -94,7 +94,7 @@ returns an object of type `std::type_info`.
 
 In code using inheritance, the closest thing to Java's instanceof in C++ is
 dynamic_cast. For example, to cast a type `Foo*` to `Bar*` you do:
-```
+```c++
 if (Bar* y = dynamic_cast<Bar*>(x)) {
    y->SomeBarMethod();
 }
@@ -143,7 +143,7 @@ pointers.
 A move constructor is a constructor that takes an rvalue. A default move
 constructor is created for each class, unless the user defines one explicitly.
 As its name suggests, when the move constructor is invoked, we avoid a copy.  
-```
+```c++
 // This is a move, not a copy
 Foo x(std::move(some_other_foo));
 // Also a move, because the return value is a temporary.
