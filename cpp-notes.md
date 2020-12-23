@@ -222,10 +222,10 @@ If I remember correctly, the virtual address space of a process has the same siz
 as all the RAM available in the machine; the program thinks that's how much mem
 it can use.
 
-#### Address sanitizer (ASan)
+#### Sanitizers
 
-ASan is a great tool that finds memory bugs at runtime, such as use-after-free
-and out-of-bounds accesses.
+Address Sanitizer (ASan) is a great tool that finds memory bugs at runtime,
+such as use-after-free and out-of-bounds accesses.
 
 At compile time, ASan instruments memory accesses in the code, and at runtime it
 checks if the access is legit, by using shadow memory.
@@ -271,8 +271,11 @@ significantly less overhead than previous state-of-the-art tools.
 For more details, see the paper at Usenix 2012
 ["AddressSanitizer: A Fast Address Sanity Checker"](https://www.usenix.org/system/files/conference/atc12/atc12-final39.pdf).
 
-TODO: read the [msan paper](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/43308.pdf).
-MSan is a tool that finds use-of-uninitialized-memory bugs.
+Memory Sanitizer (MSan) is a tool that finds use-of-uninitialized-memory bugs.
+Reading uninitialized memory can cause hard-to-debug non-deterministic bugs,
+because you are reading different garbage data every time.
+
+TODO: read the [MSan paper](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/43308.pdf).
 
 ### Classes
 
