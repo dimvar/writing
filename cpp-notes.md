@@ -344,6 +344,12 @@ C++ creates a separate class at compile time for each instantiation of a generic
 class. You can think of it as macro expansion. As a corollary, generics aren't
 erased at runtime; a `Foo<Bar>` is still a `Foo<Bar>`, not a raw Foo.
 
+### absl::Status
+
+To get the value out of a `StatusOr<Foo>`, you can do
+`x.value_or(SomeDefaultValue)` instead of the longer  
+`x.status().ok() ? x.value() : SomeDefaultValue`
+
 ### Misc notes; must organize
 
 Can use `auto` instead of a type name in a variable declaration.  
@@ -400,6 +406,15 @@ available, use `std::cerr`, not `std::cout`. The former is unbuffered (flushed
 immediately), the latter isn't, and you may lose some prints this way.
 
 Easiest way to turn a vector v to a string is `absl::StrJoin(v, " ")`.
+
+C++ provides range-based loops (analogous to Java's for-each loops), which allow
+us to omit the induction variable.
+```c++
+std::vector<std::string> strs = { "a", "b", "c", "d" };
+for (const std::string& s : strs) {
+  // process s
+}
+```
 
 ### Learning TODOs
 
