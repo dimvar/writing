@@ -45,7 +45,8 @@ it. Currently, it can be used on functions and variables, and it means that
 multiple definitions of the name in different translation units are permitted,
 as long as they are all identical. In practice, the main use is when
 implementing a function in a header file, and that header file is included in
-more than one translation unit.
+more than one translation unit. [When a function is defined inside a class, it is
+inline by default](https://en.cppreference.com/w/cpp/language/inline).
 
 The constexpr specifier on a variable or function means that it can be evaluated
 at compile time. On functions, constexpr implies inline.
