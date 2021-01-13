@@ -277,6 +277,40 @@ because you are reading different garbage data every time.
 
 TODO: read the [MSan paper](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/43308.pdf).
 
+### Loops
+
+C++ provides range-based loops (analogous to Java's for-each loops), which allow
+us to omit the induction variable.
+```c++
+std::vector<std::string> strs = { "a", "b", "c", "d" };
+for (const std::string& s : strs) {
+  // process s
+}
+```
+To iterate over the keys of a map, use `gtl::key_view`. To iterate over the
+values, use `gtl::value_view`. To give better names to first and second, do:
+```c++
+for (const auto& [name, age] : my_map) {
+  ProcessPerson(name, age);
+}
+```
+Range-based loops are syntactic sugar of iterator-based loops.
+You can use a range-based loop with any datatype that provides a
+`begin()` and an `end()` iterator.
+
+### Functions
+
+You can make an object callable as a function by defining the `()` operator on
+it, e.g.,
+```c++
+int operator()(int abc) const { return my_field_ + abc; }
+```
+A function object is often called a "functor".
+
+When creating a lambda, you can use `&` to capture a variable by reference.
+Note that capture by reference does not affect the variable's lifetime, so
+if you return such a lambda you create a dangling reference.
+
 ### Classes
 
 Classes are very different from Java; can't describe the differences succinctly.
@@ -406,15 +440,6 @@ available, use `std::cerr`, not `std::cout`. The former is unbuffered (flushed
 immediately), the latter isn't, and you may lose some prints this way.
 
 Easiest way to turn a vector v to a string is `absl::StrJoin(v, " ")`.
-
-C++ provides range-based loops (analogous to Java's for-each loops), which allow
-us to omit the induction variable.
-```c++
-std::vector<std::string> strs = { "a", "b", "c", "d" };
-for (const std::string& s : strs) {
-  // process s
-}
-```
 
 ### Learning TODOs
 
