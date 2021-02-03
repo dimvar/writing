@@ -1,5 +1,7 @@
 # Notes on debuggers
 
+### How a debugger works in Linux
+
 In Linux, a process can trace the execution of another process using the ptrace
 system call. Tracing allows us to control the execution of the process: start
 it, pause it, resume it, look at the values of registers, etc. Ptrace also
@@ -26,6 +28,24 @@ we can find where each function starts in the assembly, where each variable is
 stored in memory (so the user can inspect its value), etc. If you want to peruse
 the dwarf info yourself, you use `objdump`, e.g.:  
 `$ objdump --dwarf=info my_executable_name`
+
+### strace basics
+
+strace can attach to a process and show you the system calls performed by that
+process.
+You can either start a process with strace  
+`$ strace my_command`  
+Or you can strace a running process  
+`$ strace -p PID`
+
+### gdb basics
+
+To see the stack trace of a running process use bt (stands for backtrace)
+```bash
+gdb
+(gdb) attach PID
+(gdb) bt
+```
 
 ### References
 Eli Bendersky's series of posts on debugging:
