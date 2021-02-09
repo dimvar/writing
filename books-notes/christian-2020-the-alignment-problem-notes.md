@@ -6,6 +6,10 @@ It is a book that can motivate someone working in AI.
 What other AI books are there that are good motivational books, and talk about
 the big picture?
 
+The alignment problem: how do we design AI systems that have some independence
+(and may even be smarter than us) while ensuring that their actions align with
+our intentions and our values?
+
 Pitts was a self-taught logician.
 He was homeless in Chicago, and McCulloch, who was a professor, invited him to
 stay at his house.
@@ -73,7 +77,7 @@ were important.
 
 Matt Zeiler invented deconvolution in order to understand what each neuron of a
 net learns.
-This allowed him to find inefficiencies in Alexnet and win the Imagenet
+This allowed him to find inefficiencies in AlexNet and win the ImageNet
 competition.
 
 Chris Olah and others found which features matter most to a net when it
