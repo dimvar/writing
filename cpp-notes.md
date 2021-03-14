@@ -2,7 +2,23 @@
 
 ### Translation unit
 
-A translation unit is a cc file together with all the header files it includes transitively. It is a piece of code that can be compiled in isolation.
+A translation unit is a cc file together with all the header files it includes
+transitively. It is a piece of code that can be compiled in isolation.
+
+### Linking
+
+When compiling a translation unit, header files are used for symbols that are
+not defined in the TU. The compiler produces an object file with resolved and
+unresolved symbols in it.
+
+During linking, object files get combined into an executable. All unresolved
+symbols get resolved. The text of linking errors is usually awful, but the
+cause is often simple, e.g., there is a discrepancy in the definitions of a
+function in the header and the cc file. During compilation, you don't get
+an error because the compiler assumes that the header definition will be
+provided by some other TU. In reality, function signatures in foo_bar.h are
+always defined in foo_bar.cc, so a lint check during compilation would find
+such errors.
 
 ### Storage duration
 
