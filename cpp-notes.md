@@ -123,6 +123,8 @@ arbitrary types, e.g., you can't use void* as the from type.
 reinterpret_cast always "succeeds" (and gives back garbage in the bad cases).
 Don't use it to check type identity.
 
+`decltype` is a keyword that returns the compile-time type of its argument.
+
 ### References, pointers
 
 A reference to a type Foo (formally called lvalue reference), written `Foo&`,
@@ -170,6 +172,37 @@ Foo x(fun_that_rets_foo());
 Similarly to a move constructor, a move assignment operator avoids a copy. The
 compiler defines a default move assignment for each class, unless you define a
 custom copy constructor.
+
+### Copy elision, return value optimization (RVO)
+
+[Copy elision](https://en.cppreference.com/w/cpp/language/copy_elision) happens
+when the compiler can provably skip a copy of an object Foo.
+
+For example, when you have a function that consumes a Foo, and inside the body
+the Foo is copied, consider changing the function to take the Foo by value
+instead of by reference, and skip the copy inside the body by using `std::move`
+or similar.
+By moving the copy from the body to the call, the compiler may skip it.  
+Rule of thumb: it is easy to apply copy elision when writing constructors, which
+are often short, and it is fine to not try to apply it when writing other
+functions.
+
+RVO is a subcase of copy elision (I think).
+When a function returns a Foo, the compiler can sometimes optimize the copy
+away.
+
+* In the caller, the result must either be used directly in an expression, or
+  assigned to a newly declared variable.
+* In the callee, the return must either be an expression, or a single local
+  variable.
+  If there are multiple return statements using different local vars, RVO
+  won't happen.
+  RVO also applies if you return a formal parameter, and it has a move
+  constructor.
+  For more, see
+  [here](https://en.cppreference.com/w/cpp/language/return#Automatic_move_from_local_variables_and_parameters).
+
+Rule of thumb: you generally don't need to `std::move` a return value.
 
 ### RAII
 
@@ -433,24 +466,6 @@ only reads it, pass it by reference, instead of passing a pointer to Foo.
 Only declare an argument that has an object type, instead of a reference or a pointer, when you want to force a copy. Never else.
 
 Don't use `NULL`; its definition is implementation dependent. Use `nullptr`.
-
-RVO (return-value optimization): when a function returns a Foo, in some cases
-the callee and the caller don't need to have distinct copies of Foo; the
-compiler is guaranteed to optimize the copies away.
-
-* In the caller, the result must either be used directly in an expression, or
-  assigned to a newly declared variable.
-* In the callee, the return must either be an expression, or a single local
-  variable. If there are multiple return statements using different local vars,
-  RVO won't happen.
-
-Copy elision. When you have a function that consumes a Foo and inside the body
-the Foo is copied, consider changing the function to take the Foo by value
-instead of by reference, and skip the copy inside the body by using std::move or
-similar. By moving the copy from the body to the call, the compiler may skip it.
-Rule of thumb: it's easy to apply copy elision when writing constructors, which
-are often short, and it is fine to not try to apply it when writing other
-functions.
 
 When debugging, I usually use `LOG(INFO)`. In rare cases when it is not
 available, use `std::cerr`, not `std::cout`. The former is unbuffered (flushed
