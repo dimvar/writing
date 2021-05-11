@@ -153,21 +153,22 @@ more information, and recall it faster.
 
 Benjamin Franklin developed his own practice method for writing, and used it to
 become a great writer.
-He found an essay X that he liked.  
-To improve his phrasing, he took notes on each sentence of X.
-Then, after he'd forgotten X, he tried to recreate it from his notes, and
-compared to the original.  
-To improve his vocabulary, he rewrote X in verse, then waited again, and wrote
-it back in regular style and compared to the original.  
-Last, to improve his order of presenting the facts, he shuffled his notes of
-each sentence, then after he'd forgotten the essay, he tried to find the right
-order and recreate the essay, and compared to the original.
+He found an essay X that he liked.
+
+* To improve his phrasing, he took notes on each sentence of X.
+  Then, after he'd forgotten X, he tried to recreate it from his notes, and
+  compared to the original.
+* To improve his vocabulary, he rewrote X in verse, then waited again, and wrote
+  it back in regular style and compared to the original.
+* Last, to improve his order of presenting the facts, he shuffled his notes of
+  each sentence, then after he'd forgotten the essay, he tried to find the right
+  order and recreate the essay, and compared to the original.
 
 He didn't improve by writing lots of essays, but by targeting the individual
 elements he was trying to improve.
 Very clever system.
 
-Deliberate practice allows experts to circumvent physical limitations.
+Deliberate practice allows experts to work around physical limitations.
 For example, top tennis players defend a serve by reading the opponent's body
 while the ball is still in the air, to predict the serve's location.
 Top typists are faster by reading further ahead.
