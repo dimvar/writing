@@ -1,5 +1,25 @@
 # Python notes
 
+### Misc language basics (scalars etc)
+
+`type(exp)` evaluates the expression and returns its type.
+
+Assignments are statements, not expressions.
+
+`None` is a value similar to JS's undefined. A return without an expression
+makes a function return `None`. Finishing the function body w/out a return is
+also the same as returning `None`.
+
+`int('123')` returns 123.  
+`float(1)` returns 1.0.  
+`str(expr)` converts `expr` to a string.
+
+The operator `/` is division in Python 3, but integer division in Python 2.
+In Python 3, integer division is `//`.
+
+The `pass` statement is a no-op, and it exists because Python doesn't have
+semicolon.
+
 ### Sequences: strings, lists, tuples, etc
 
 Strings can be indexed like arrays, and sliced.  
@@ -75,25 +95,23 @@ Dictionaries are also built-in. You can think of them as JS object literals
 
 Both sets and dictionaries are written using curlies, so be mindful of that.
 
-### Scoping
+### Variables and scoping
+
+Unlike JS, you don't need to declare a variable, you just assign to it.
 
 Inside a function, you can reference a variable from an enclosing non-global
 scope, but if you try to write to it, a new variable is actually created in
 the current scope. Non-local non-global variables are immutable to you.
 
 ### Misc statements
-
-Unlike JS, you don't need to declare a variable, you just assign to it.  
+  
 Python has multiple assignment:  
 `a, b = 1, 4`
-
-The `pass` statement is a no-op, and it exists because Python doesn't have
-semicolon.
 
 ### Control flow
 
 IF syntax: with colon and elif
-```
+```python
 if x < 0:
   print 'Negative'
 elif x == 0:
@@ -104,14 +122,20 @@ else:
   print 'More'
 ```
 
-FOR is always a for/in, not a classic for:
+Neat syntax for two comparisons at once
+```python
+if 0 < x < 10:
+  # do stuff
 ```
+
+FOR is always a for/in, not a classic for:
+```python
 words = ['cat', 'window', 'defenestrate']
 for w in words:
   print w, len(w)
 ```
 You use `range()` to create a numeric sequence and iterate over it. Example:
-```
+```python
 squares = []
 for x in range(10):
   squares.append(x**2)
@@ -125,7 +149,7 @@ if the loop didn't exit through a break.
 ### Exceptions
 
 Example:
-```
+```python
 try
   # Your code here.
   # To throw an exception, the Python keyword is “raise”.
@@ -163,7 +187,7 @@ In the body, you can reference variables from the enclosing scope.
 
 The name of a file without the .py suffix is the name of the module.
 
-```
+```python
 # Puts the name of the module in the symbol table.
 import foo
 # Puts the name of the functions from the module in the symbol table.
@@ -184,7 +208,7 @@ can say things like:
 ### Files
 
 Open a file for reading and read a line from it:
-```
+```python
 with open('my_file_name', 'r') as f:
      read_data = f.readline()
 ```
@@ -197,7 +221,7 @@ done.
 Fields are called attributes in Python lingo.
 
 Example class definition:
-```
+```python
 class Foo:
   # Static attribute
   w = 123
@@ -264,9 +288,5 @@ provides basic logging functionality.
 ### Misc
 
 Underscore can be used to get the result of the last expression in the repl.
-
-None is a value similar to JS's undefined. A return without an expression
-makes a func return None. Finishing the func body w/out a return is also the
-same as returning None.
 
 Python provides weak references.
