@@ -1,5 +1,24 @@
 # Python notes
 
+####Contents
+
+* [Misc language basics (scalars etc)](#lang_basics)
+* [Sequences (strings, lists, and tuples)](#sequences)
+* [Sets and dictionaries](#sets_dicts)
+* [Variables and scoping](#vars_scoping)
+* [Misc statements](#misc_stm)
+* [Control flow](#control_flow)
+* [Exceptions](#exceptions)
+* [Functions](#functions)
+* [Modules](#modules)
+* [Files](#files)
+* [Classes](#classes)
+* [Iterators / Generators](#iterators_generators)
+* [Coding style](#coding_style)
+* [Libraries](#libraries)
+* [Misc](#misc)
+
+<a name="lang_basics"/>
 ### Misc language basics (scalars etc)
 
 `type(exp)` evaluates the expression and returns its type.
@@ -20,23 +39,59 @@ In Python 3, integer division is `//`.
 The `pass` statement is a no-op, and it exists because Python doesn't have
 semicolon.
 
-### Sequences: strings, lists, tuples, etc
+I'm a bit 
+surprised that there are many built-ins in the global namespace (about 60,
+listed [here](https://docs.python.org/3/library/functions.html).
 
-Strings can be indexed like arrays, and sliced.  
-Strings are immutable.  
-With triple quotes, a string literal can span multiple lines.  
+<a name="sequences"/>
+### Sequences (strings, lists, and tuples)
+
+#### Strings
+
+Strings can be indexed with the usual array notation.
+
+Strings are immutable.
+
+With triple quotes, a string literal can span multiple lines.
+This is commonly used for doc strings.
+
 Two string literals that are next to each other are automatically concatenated!
 (as in C++, but still weird to me.)
 
-Lists are what JS calls arrays. They can be indexed and sliced.  
-You can assign to a slice to modify a list, and to add/remove items from the
-list.  
-The built-in `len` function returns the size of a list.  
-With the `in` keyword you can check membership in a list.
+`*` is the repeat operator in strings.
 
-The built-in functions filter, map, and reduce do the usual thing. I'm a bit 
-surprised that there are many built-ins in the global namespace (about 60,
-listed [here](https://docs.python.org/2/library/functions.html)).
+```
+>>> 'foo' * 2
+'foofoo'
+```
+
+#### Lists
+
+Lists are similar to arrays in JS and ArrayLists in Java.
+
+You can get a slice of a list in many ways. All of these return a copy:
+
+* `x[2:5]` elms at indices 2 (inclusive) through 5 (exclusive)
+* `x[:5]` elms from start up to 5
+* `x[2:]` elms from 2 to the end
+* `x[3:10:2]` elms from 3 to 10 with stride 2
+* `x[::-1]` with stride -1 it starts at the end (reverses the string)
+* `x[2:15:3, :4:2]` gets slice of multi-dimensional list; dims separated by
+  commas
+
+Strings and tuples can also be sliced in the same way.
+
+`len(s)` gives the length of a sequence `s`.
+
+With the `in` keyword you can check membership in a sequence.
+
+You can assign to a slice to add/remove elms from a list in-place.  
+Removes the first elm of the list.  
+`lst[0:1] = []`  
+Puts -1 to the start of the list.  
+`lst2[0:0] = [-1]` 
+
+The built-in functions filter and map do the usual thing.
 
 List comprehension example:
 ```
@@ -54,7 +109,10 @@ of a zipper, and the zip function interleaves the teeth. Example:
 [(1, 4), (2, 5), (3, 6)]
 ```
 
-The `del` statement can delete an element or a slice from a list. It can also delete a variable (bad idea, as we know from JS).
+The `del` statement can delete an element or a slice from a list.
+It can also delete a variable (bad idea, as we know from JS).
+
+#### Tuples
 
 Example of creating a tuple and accessing an element:
 ```
@@ -79,6 +137,7 @@ Get elements at indices 2 through 15, with stride 3
 Can do multi-dimensional too; dimensions separated by commas:  
 `a[2:15:3, :4:2]`
 
+<a name="sets_dicts"/>
 ### Sets and dictionaries
 
 Sets are built-in in the language. Operations on sets are very concise to
@@ -95,6 +154,7 @@ Dictionaries are also built-in. You can think of them as JS object literals
 
 Both sets and dictionaries are written using curlies, so be mindful of that.
 
+<a name="vars_scoping"/>
 ### Variables and scoping
 
 Unlike JS, you don't need to declare a variable, you just assign to it.
@@ -103,11 +163,13 @@ Inside a function, you can reference a variable from an enclosing non-global
 scope, but if you try to write to it, a new variable is actually created in
 the current scope. Non-local non-global variables are immutable to you.
 
+<a name="misc_stm"/>
 ### Misc statements
   
 Python has multiple assignment:  
 `a, b = 1, 4`
 
+<a name="control_flow"/>
 ### Control flow
 
 IF syntax: with colon and elif
@@ -146,6 +208,7 @@ one element at a time. To avoid that, you can use a while loop.
 Weird: loops can have an else clause, which gets executed after the loop only
 if the loop didn't exit through a break.
 
+<a name="exceptions"/>
 ### Exceptions
 
 Example:
@@ -159,6 +222,7 @@ finally:
   # cleanup code that runs no matter what
 ```
 
+<a name="functions"/>
 ### Functions
 
 When defining a function with default values for arguments, the defaults are
@@ -183,6 +247,7 @@ You can define a lambda (function expression) like this: `lambda a, b: a+b`
 The body of the lambda must be a single expression!  
 In the body, you can reference variables from the enclosing scope.
 
+<a name="modules"/>
 ### Modules
 
 The name of a file without the .py suffix is the name of the module.
@@ -205,6 +270,7 @@ directories, where each directory defines a file named `__init__.py`. Then you
 can say things like:  
 `import a.b.c.foo as my_foo`
 
+<a name="files"/>
 ### Files
 
 Open a file for reading and read a line from it:
@@ -216,6 +282,7 @@ with open('my_file_name', 'r') as f:
 By using `with`, we ensure that the file is closed after the `with` body is
 done.
 
+<a name="classes"/>
 ### Classes
 
 Fields are called attributes in Python lingo.
@@ -263,6 +330,7 @@ language.
 Multiple inheritance: you can define multiple base classes for a class and
 they are searched left to right for method resolution.
 
+<a name="iterators_generators"/>
 ### Iterators / Generators
 
 A for loop in Python uses an iterator under the scenes. You can define your own iterator by defining a class with an `__iter__` and a `next` method.
@@ -271,6 +339,7 @@ A generator is a compact way of writing an iterator: you write it as a
 function instead of as a class, and call `yield` in the body. When the
 generator ends, it automatically raises `StopIteration`.
 
+<a name="coding_style"/>
 ### Coding style
 
 [PEP8](https://www.python.org/dev/peps/pep-0008/) is the full style guide.
@@ -279,12 +348,14 @@ The convention is to use CamelCase for classes and lower_case_with_underscores
 for functions and methods. Always use self as the name for the first method
 argument.
 
+<a name="libraries"/>
 ### Libraries
 
 Python is great for scripting; much more manageable than bash. See standard
 libraries os, shutil, and re (for regular expressions). The logging library
 provides basic logging functionality.
 
+<a name="misc"/>
 ### Misc
 
 Underscore can be used to get the result of the last expression in the repl.
