@@ -19,6 +19,7 @@
 * [Misc](#misc)
 
 <a name="lang_basics"/>
+
 ### Misc language basics (scalars etc)
 
 `type(exp)` evaluates the expression and returns its type.
