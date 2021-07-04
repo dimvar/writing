@@ -1,6 +1,6 @@
 # Python notes
 
-####Contents
+#### Contents
 
 * [Misc language basics (scalars etc)](#lang_basics)
 * [Sequences (strings, lists, and tuples)](#sequences)
