@@ -4,7 +4,11 @@
 
 The book's ideas are based on research in the field of positive psychology. In psychology, the large majority of studies look at causes of unhappiness (e.g., depression, alcoholism) and how to help people get back to normal; their baseline mood. Positive psychology proposes to study "happiness outliers" and take what they do, so that more people's baseline mood goes from neutral to happy.
 
-Studies will often transform a question like "how fast can a child learn to read" to "how fast does the average child learn to read". This way, they miss the opportunity to study outliers, and take what they do for everyone to copy.
+Studies will often transform a question like "how fast can a child learn to read" to "how fast does the average child learn to read".
+This way, they miss the opportunity to study outliers, and take what outliers do for everyone to copy.
+In general, any person willing to work hard to develop a skill X can achieve outlier performance on X;
+they don't need any special talent.
+One's performance is usually average only on tasks they don't care about, and don't practice deliberately.
 
 On the news, you don't see a statistically accurate picture of the world; you see news that generate views. So, they don't generally report on commonplace things (that's boring). By definition, they have to report on rare, unexpected things. They also overly focus on unhappy events. This fools your brain into overly worrying about the negatives in the world, instead of a more balanced view.
 
@@ -22,7 +26,9 @@ The author proposes 7 principles that help make people happy, and as a result mo
 
 The idea that happiness causes success, not the other way around.
 
-The author discusses studies where people who had been primed with happy thoughts performed better on various tasks. Argues that a happy person tends to have a clearer head than a stressed person.
+The author discusses studies where people who had been primed with happy thoughts performed better on various tasks.
+When someone is feeling happy, their brain releases dopamine.
+Dopamine also activates the brain's learning centers, which helps people learn more and be more creative.
 
 Some ways of improving one's baseline happiness (daily mood) are:
 
@@ -130,7 +136,7 @@ Important: the idea is *not* to remove the bad options, but make it harder to do
 
 ### Social investment
 
-The strength of one's social ties is the strongest predictor of happiness and success, according to many studies.
+The strength of one's social ties is a strong predictor of happiness, lifespan, and work success, according to many studies.
 
 Having a strong social network multiplies one's intellectual, emotional, and physical abilities, allowing us to do more.
 
@@ -139,6 +145,10 @@ In hardship, most people weaken their social ties and go at it alone, whereas th
 Some research suggests that how we support people in good times correlates more with the strength of the relationship than how we support them in difficult times. Counterintuitive to me.
 
 ### Epilogue
+
+When the author describes the 7 principles to people, they sometimes say something like "I already do most of this, but my partner needs to hear it".
+A person should be focusing on making changes to themselves, and then see their positive behavior reflected in others.
+Don't just expect others to change for you.
 
 Describes how emotions spread easily in a social setting.
 
