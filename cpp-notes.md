@@ -428,11 +428,19 @@ C++ creates a separate class at compile time for each instantiation of a generic
 class. You can think of it as macro expansion. As a corollary, generics aren't
 erased at runtime; a `Foo<Bar>` is still a `Foo<Bar>`, not a raw Foo.
 
-### absl::Status
+### absl
+
+The easiest way to turn a vector v to a string is `absl::StrJoin(v, " ")`.
 
 To get the value out of a `StatusOr<Foo>`, you can do
-`x.value_or(SomeDefaultValue)` instead of the longer  
-`x.status().ok() ? x.value() : SomeDefaultValue`
+```c++
+x.value_or(SomeDefaultValue)
+```
+instead of the longer
+```c++
+x.status().ok() ? x.value() : SomeDefaultValue
+```
+`Value_or` is defined on `absl::optional` as well.
 
 ### Misc notes; must organize
 
@@ -470,8 +478,6 @@ Don't use `NULL`; its definition is implementation dependent. Use `nullptr`.
 When debugging, I usually use `LOG(INFO)`. In rare cases when it is not
 available, use `std::cerr`, not `std::cout`. The former is unbuffered (flushed
 immediately), the latter isn't, and you may lose some prints this way.
-
-Easiest way to turn a vector v to a string is `absl::StrJoin(v, " ")`.
 
 ### Learning TODOs
 
