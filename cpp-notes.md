@@ -409,10 +409,18 @@ virtual, and assign it to default, not to 0.
 
 Multiple inheritance for classes.
 
-When a constructor is marked as explicit, then the default constructor isn't
+When a constructor is marked as `explicit`, then the default constructor isn't
 defined. This is encouraged for classes that only define one single-argument
 constructor; because then the user won't accidentally forget to provide an
 argument when instantiating.
+
+Implicit conversion: when you pass a `Foo` to a context that expects a `Bar`,
+and `Bar` has a one-argument constructor that takes a `Foo` and is not marked
+`explicit`, then the `Foo` is silently converted to a `Bar`.
+For example, `std::string` can be implicitly converted to `absl::string_view`.
+Usually, you don't want to define implicit conversions for your types.
+Roughly, it is OK to do it when `Foo` behaves like a subtype of `Bar`.
+
 
 Constructors of subclasses need to say what arguments they are passing to the
 super constructor.
