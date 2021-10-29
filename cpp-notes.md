@@ -344,6 +344,11 @@ for (const auto& [name, age] : my_map) {
   ProcessPerson(name, age);
 }
 ```
+This form of assignment is called [structured binding](https://en.cppreference.com/w/cpp/language/structured_binding),
+and it has been available since C++17.
+It is a good way to get elements out of tuples.
+It must always be used with `auto`.
+
 Range-based loops are syntactic sugar of iterator-based loops.
 You can use a range-based loop with any datatype that provides a
 `begin()` and an `end()` iterator.
