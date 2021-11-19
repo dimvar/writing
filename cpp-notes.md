@@ -441,6 +441,17 @@ C++ creates a separate class at compile time for each instantiation of a generic
 class. You can think of it as macro expansion. As a corollary, generics aren't
 erased at runtime; a `Foo<Bar>` is still a `Foo<Bar>`, not a raw Foo.
 
+### Maps and other containers
+
+To insert an element in a map only if it is not there, use `insert` or
+`try_emplace` (constructs the elm in place, more efficient), e.g.,
+```c++
+auto [it, inserted] = map_foo.insert({key, val});
+auto [it, inserted] = map_foo.try_emplace(key, std::move(val));
+```
+The second element of the returned pair is a boolean showing whether the
+insertion happened.
+
 ### absl
 
 The easiest way to turn a vector v to a string is `absl::StrJoin(v, " ")`.
