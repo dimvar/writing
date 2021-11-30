@@ -344,6 +344,22 @@ because you are reading different garbage data every time.
 
 TODO: read the [MSan paper](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/43308.pdf).
 
+### Enums
+
+When declaring a traditional enum, the enum keys (also called enumerators) are
+in the same scope as the enum.
+```c++
+enum Foo { kOne, kTwo, kThree };
+// kOne in scope here
+```
+A better alternative to avoid unexpected naming conflicts is a *scoped enum*
+```c++
+enum class Foo { kOne, kTwo, kThree };
+// kOne not visible, use Foo::kOne
+```
+In addition to the better scoping rules, the enumerators of a scoped enum are
+not implicitly convertible to an int, you have to use explicit casts to convert.
+
 ### Loops
 
 C++ provides range-based loops (analogous to Java's for-each loops), which allow
