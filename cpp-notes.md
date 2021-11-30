@@ -352,7 +352,7 @@ in the same scope as the enum.
 enum Foo { kOne, kTwo, kThree };
 // kOne in scope here
 ```
-A better alternative to avoid unexpected naming conflicts is a *scoped enum*
+A better alternative to avoid unexpected naming conflicts is a *scoped enum*.
 ```c++
 enum class Foo { kOne, kTwo, kThree };
 // kOne not visible, use Foo::kOne
