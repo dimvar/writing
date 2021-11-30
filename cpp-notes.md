@@ -125,7 +125,19 @@ Don't use it to check type identity.
 
 `decltype` is a keyword that returns the compile-time type of its argument.
 
-### References, pointers
+### Object types, references, and pointers
+
+In Java, an object type `Foo` means that we have a reference to the object.
+In C++, we have the object itself.
+This is a very important distinction.
+When we pass a `Foo` around in C++, the whole object gets copied.
+For example, a copy happens at an assignment, when passing the object to a
+function, or returning it from a function.
+To avoid copies, we can use references or pointers instead of the object type
+directly.
+
+Another important difference from Java is that when declaring a local variable
+of an object type `Foo`, the object is allocated on the stack!
 
 A reference to a type Foo (formally called lvalue reference), written `Foo&`,
 is an alias of a Foo instance.
@@ -138,6 +150,11 @@ A reference is not an object. So, you cannot have an array of references, or a
 reference of a reference, etc.  
 When a function takes a reference, it is common style to also make it const.
 If the function mutates the parameter, make the parameter a pointer instead.
+
+We can access the members of a pointer to Foo using the arrow notation:
+`my_foo->ProcessBar()`.
+
+Don't use `NULL`; its definition is implementation dependent. Use `nullptr`.
 
 ### Temporaries, rvalue references, moves
 
@@ -355,6 +372,11 @@ You can use a range-based loop with any datatype that provides a
 
 ### Functions
 
+As a useful rule of thumb, if you are writing a function that takes a Foo and
+only reads it, pass it by reference, instead of passing a pointer to Foo.  
+Only declare an argument that has an object type, instead of a reference or a
+pointer, when you want to force a copy, never else.
+
 You can make an object callable as a function by defining the `()` operator on
 it, e.g.,
 ```c++
@@ -443,6 +465,10 @@ erased at runtime; a `Foo<Bar>` is still a `Foo<Bar>`, not a raw Foo.
 
 ### Maps and other containers
 
+Array declaration syntax is different from Java.
+The length is carried around separately.  
+Don't use arrays. Modern C++ style uses `std::vector`.
+
 To insert an element in a map only if it is not there, use `insert` or
 `try_emplace` (constructs the elm in place, more efficient), e.g.,
 ```c++
@@ -466,42 +492,20 @@ x.status().ok() ? x.value() : SomeDefaultValue
 ```
 `Value_or` is defined on `absl::optional` as well.
 
+### Debugging
+
+When debugging, I usually use `LOG(INFO)`.
+In rare cases when it is not available, use `std::cerr`, not `std::cout`.
+The former is unbuffered (flushed immediately), the latter isn't, and you may
+lose some prints this way.
+
 ### Misc notes; must organize
 
 Can use `auto` instead of a type name in a variable declaration.  
 Need to qualify the auto with &, otherwise we get unintended copies. Prefer
 `const auto&` over `auto&`.
 
-Function arguments are passed by value, and you add & to the formal param name
-to pass by reference.  
-Formals can be annotated as const.  
-Formals can have default values.
-
 Namespace aliasing.
-
-Array declaration syntax is different from Java. The length is carried around
-separately :(  
-Don't use arrays. Modern C++ style uses `std::vector`.
-
-Pointers and pointer contents can be const.
-
-Arrow operator to access elements from pointers to structures.
-
-All local variables, including objects, live on the stack!!
-
-Besides assignments, copies can happen when passing arguments to a function,
-when returning a value from a function, when initializing the fields of a class.
-Basically everywhere where a value may be moved from one address to another.
-
-As a useful rule of thumb, if you are writing a function that takes a Foo and
-only reads it, pass it by reference, instead of passing a pointer to Foo.  
-Only declare an argument that has an object type, instead of a reference or a pointer, when you want to force a copy. Never else.
-
-Don't use `NULL`; its definition is implementation dependent. Use `nullptr`.
-
-When debugging, I usually use `LOG(INFO)`. In rare cases when it is not
-available, use `std::cerr`, not `std::cout`. The former is unbuffered (flushed
-immediately), the latter isn't, and you may lose some prints this way.
 
 ### Learning TODOs
 
@@ -509,5 +513,3 @@ Learn more about [macros](https://gcc.gnu.org/onlinedocs/gcc-4.8.5/cpp/Macros.ht
 
 [This series of posts](https://lwn.net/Articles/276782/) by Ian Lance Taylor is
 a good description of linkers.
-
-
