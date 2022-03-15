@@ -479,6 +479,12 @@ C++ creates a separate class at compile time for each instantiation of a generic
 class. You can think of it as macro expansion. As a corollary, generics aren't
 erased at runtime; a `Foo<Bar>` is still a `Foo<Bar>`, not a raw Foo.
 
+When you see `template <>` followed by a method definition X, it means that X is
+the fully instantiated version of a generic method X declared earlier.
+The compiler knows to use that specialization when X is called with the
+appropriate types.
+Similarly for classes.
+
 ### Maps and other containers
 
 Array declaration syntax is different from Java.
