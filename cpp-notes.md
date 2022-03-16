@@ -479,6 +479,11 @@ C++ creates a separate class at compile time for each instantiation of a generic
 class. You can think of it as macro expansion. As a corollary, generics aren't
 erased at runtime; a `Foo<Bar>` is still a `Foo<Bar>`, not a raw Foo.
 
+Annoyance: when a method in a header file uses templates, the whole method needs
+to be in the header, not just the signature. We need the full definition of the
+method during compile time to macro expand the templates. But the cc file is
+not part of the translation unit of other files that include this header. Ugh.
+
 When you see `template<>` followed by a method definition X, it means that X is
 the fully instantiated version of a generic method X declared earlier.
 The compiler knows to use that specialization when X is called with the
