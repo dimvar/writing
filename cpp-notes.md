@@ -490,6 +490,11 @@ The compiler knows to use that specialization when X is called with the
 appropriate types.
 Similarly for classes.
 
+When you instantiate a template after a name-resolution operator `::`, you need
+to add the word `template` so that the compiler parses `<` as left angle bracket
+instead of a less-than, e.g., `foo::bar::template baz<float>`.
+Same for the `.` and `->` operators.
+
 ### Maps and other containers
 
 Array declaration syntax is different from Java.
