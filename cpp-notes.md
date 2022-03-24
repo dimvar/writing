@@ -470,6 +470,8 @@ super constructor.
 
 ### Templates (Generics)
 
+#### Template expansion at compile time
+
 Use `<typename T>` when declaring a template variable instead of the equivalent
 `<class T>`.  
 When calling a generic function you can omit the instantiation and it is
@@ -482,7 +484,9 @@ erased at runtime; a `Foo<Bar>` is still a `Foo<Bar>`, not a raw Foo.
 Annoyance: when a method in a header file uses templates, the whole method needs
 to be in the header, not just the signature. We need the full definition of the
 method during compile time to macro expand the templates. But the cc file is
-not part of the translation unit of other files that include this header. Ugh.
+not part of the translation unit of other files that include this header.
+
+#### Syntax issues
 
 When you see `template<>` followed by a method definition X, it means that X is
 the fully instantiated version of a generic method X declared earlier.
@@ -494,6 +498,19 @@ When you instantiate a template after a name-resolution operator `::`, you need
 to add the word `template` so that the compiler parses `<` as left angle bracket
 instead of a less-than, e.g., `foo::bar::template baz<float>`.
 Same for the `.` and `->` operators.
+
+#### Variadic templates
+
+Occasionally, you will see template definition that can take an arbitrary
+number of type parameters, e.g.,
+
+```c++
+template<typename... T> void foo(T... args) {
+  // stuff
+}
+```
+
+These are called variadic templates. More info [here](https://en.cppreference.com/w/cpp/language/parameter_pack).
 
 ### Maps and other containers
 
