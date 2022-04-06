@@ -1,9 +1,21 @@
 ## Atomic habits -- notes
 
-The premise of the book is that a person can make small changes to their daily
-habits, and over the years these changes pay off greatly.
+Main messages:
 
-Lots of the examples in the book are from sports, which are more regimented and
+* Habits, since they are behaviors that we repeat very often, make us who we are
+  to a large extent. Our habits are our identity.
+* It is possible to build good habits that produce small, consistent
+  improvements day-in and day-out, and over time (months or years) achieve great
+  results. This is clear for athletes and classical musicians, but the book's
+  premise is that this process works for all fields.
+* OTOH, it is very easy to build bad habits, and we often do it without even
+  realizing it, because of cues in our environment. By changing the environment
+  to remove the cues, we can try to break bad habits.
+
+The ideas in this book combine nicely with the ideas in "Talent is Overrated",
+"The Happiness Advantage", and "Flow: Living at the Peak of Your Abilities".
+
+Lots of the examples in the book are from sports, which are more regimented
 than science, and the process of improvement is more well understood.
 
 Talks about the process vs the goal, and recommends focusing on the process.
