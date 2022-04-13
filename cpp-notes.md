@@ -464,9 +464,16 @@ For example, `std::string` can be implicitly converted to `absl::string_view`.
 Usually, you don't want to define implicit conversions for your types.
 Roughly, it is OK to do it when `Foo` behaves like a subtype of `Bar`.
 
-
 Constructors of subclasses need to say what arguments they are passing to the
 super constructor.
+
+#### Structs
+
+A struct in C++ is not just the usual collection of fields.
+It is almost the same as a class, e.g., it can have a constructor and private
+fields.
+However, the [Google style guide](https://google.github.io/styleguide/cppguide.html#Structs_vs._Classes)
+discourages using structs that are more than a simple collection of fields.
 
 ### Templates (Generics)
 
