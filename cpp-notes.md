@@ -404,6 +404,16 @@ When creating a lambda, you can use `&` to capture a variable by reference.
 Note that capture by reference does not affect the variable's lifetime, so
 if you return such a lambda you create a dangling reference.
 
+When you want to pass a function as an argument, you need to use one of the
+available functor types. `std::function` is designed to be copyable. Therefore,
+the underlying function must also be copyable, which means that it can't include
+a `unique_ptr`.
+If you want to avoid copying the underlying function, use `gtl::AnyInvocable`.
+
+If you don't need the functor type to manage the storage of the underlying
+function, use `absl::FunctionRef`. `absl::FunctionRef` is a view for callables,
+like `absl::string_view` is for strings.
+
 ### Classes
 
 Classes are very different from Java; can't describe the differences succinctly.
