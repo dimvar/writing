@@ -344,6 +344,20 @@ because you are reading different garbage data every time.
 
 TODO: read the [MSan paper](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/43308.pdf).
 
+### Vectors and arrays
+
+Array declaration syntax is different from Java.
+The length is carried around separately.  
+
+Avoid using arrays. Modern C++ style uses `std::vector`.
+
+You can initialize an array by providing an initializer of the form `{v1, v2, ...}`.
+If the initializer has fewer elements than the array, the remaining elements are
+initialized to default values (see
+[here](https://www.cplusplus.com/doc/tutorial/arrays/#:~:text=Initializing%20arrays&text=But%20the%20elements%20in%20an,%2C%2077%2C%2040%2C%2012071%20%7D%3B)).
+
+The easiest way to turn a vector v to a string is `absl::StrJoin(v, " ")`.
+
 ### Enums
 
 When declaring a traditional enum, the enum keys (also called enumerators) are
@@ -531,10 +545,6 @@ These are called variadic templates. More info [here](https://en.cppreference.co
 
 ### Maps and other containers
 
-Array declaration syntax is different from Java.
-The length is carried around separately.  
-Don't use arrays. Modern C++ style uses `std::vector`.
-
 To insert an element in a map only if it is not there, use `insert` or
 `try_emplace` (constructs the elm in place, more efficient), e.g.,
 ```c++
@@ -545,8 +555,6 @@ The second element of the returned pair is a boolean showing whether the
 insertion happened.
 
 ### absl
-
-The easiest way to turn a vector v to a string is `absl::StrJoin(v, " ")`.
 
 To get the value out of a `StatusOr<Foo>`, you can do
 ```c++
