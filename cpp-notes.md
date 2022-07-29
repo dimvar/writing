@@ -530,6 +530,11 @@ to add the word `template` so that the compiler parses `<` as left angle bracket
 instead of a less-than, e.g., `foo::bar::template baz<float>`.
 Same for the `.` and `->` operators.
 
+You may see `typename` in the definition of a templated method, not just at
+the beginning. This happens because a subsequent declaration depends on the
+templated variable. For more details, see
+[here](https://en.cppreference.com/w/cpp/language/dependent_name).
+
 #### Variadic templates
 
 Occasionally, you will see template definition that can take an arbitrary
