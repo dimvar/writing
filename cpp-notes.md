@@ -26,9 +26,12 @@ Each object in C++ has a storage duration.
 
 * Automatic: space for the object is allocated at the beginning of the block
   where the object is declared, and deallocated at the end of the block.
+  Space is allocated on the stack or in registers.
 * Static: storage is allocated at the beginning of the program, and deallocated
-  at the end. This is what happens when you use the static keyword.
+  at the end. This is what happens when you use the static keyword. Static
+  storage is long-lived storage that is separate from the heap.
 * Dynamic: storage is allocated and freed at runtime (using new and delete).
+  Space is allocated in the heap.
 * Thread: for objects declared with thread_local. I have never used this.
 
 You can declare a function-scoped variable as static, and the variable will only
