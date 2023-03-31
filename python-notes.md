@@ -45,6 +45,7 @@ surprised that there are many built-ins in the global namespace (about 60,
 listed [here](https://docs.python.org/3/library/functions.html).
 
 <a name="sequences"/>
+
 ### Sequences (strings, lists, and tuples)
 
 #### Strings
@@ -139,6 +140,7 @@ Can do multi-dimensional too; dimensions separated by commas:
 `a[2:15:3, :4:2]`
 
 <a name="sets_dicts"/>
+
 ### Sets and dictionaries
 
 Sets are built-in in the language. Operations on sets are very concise to
@@ -156,6 +158,7 @@ Dictionaries are also built-in. You can think of them as JS object literals
 Both sets and dictionaries are written using curlies, so be mindful of that.
 
 <a name="vars_scoping"/>
+
 ### Variables and scoping
 
 Unlike JS, you don't need to declare a variable, you just assign to it.
@@ -165,12 +168,14 @@ scope, but if you try to write to it, a new variable is actually created in
 the current scope. Non-local non-global variables are immutable to you.
 
 <a name="misc_stm"/>
+
 ### Misc statements
   
 Python has multiple assignment:  
 `a, b = 1, 4`
 
 <a name="control_flow"/>
+
 ### Control flow
 
 IF syntax: with colon and elif
@@ -210,6 +215,7 @@ Weird: loops can have an else clause, which gets executed after the loop only
 if the loop didn't exit through a break.
 
 <a name="exceptions"/>
+
 ### Exceptions
 
 Example:
@@ -224,6 +230,7 @@ finally:
 ```
 
 <a name="functions"/>
+
 ### Functions
 
 When defining a function with default values for arguments, the defaults are
@@ -249,6 +256,7 @@ The body of the lambda must be a single expression!
 In the body, you can reference variables from the enclosing scope.
 
 <a name="modules"/>
+
 ### Modules
 
 The name of a file without the .py suffix is the name of the module.
@@ -272,6 +280,7 @@ can say things like:
 `import a.b.c.foo as my_foo`
 
 <a name="files"/>
+
 ### Files
 
 Open a file for reading and read a line from it:
@@ -284,6 +293,7 @@ By using `with`, we ensure that the file is closed after the `with` body is
 done.
 
 <a name="classes"/>
+
 ### Classes
 
 Fields are called attributes in Python lingo.
@@ -332,6 +342,7 @@ Multiple inheritance: you can define multiple base classes for a class and
 they are searched left to right for method resolution.
 
 <a name="iterators_generators"/>
+
 ### Iterators / Generators
 
 A for loop in Python uses an iterator under the scenes. You can define your own iterator by defining a class with an `__iter__` and a `next` method.
@@ -341,6 +352,7 @@ function instead of as a class, and call `yield` in the body. When the
 generator ends, it automatically raises `StopIteration`.
 
 <a name="coding_style"/>
+
 ### Coding style
 
 [PEP8](https://www.python.org/dev/peps/pep-0008/) is the full style guide.
@@ -350,6 +362,7 @@ for functions and methods. Always use self as the name for the first method
 argument.
 
 <a name="libraries"/>
+
 ### Libraries
 
 Python is great for scripting; much more manageable than bash. See standard
@@ -357,6 +370,7 @@ libraries os, shutil, and re (for regular expressions). The logging library
 provides basic logging functionality.
 
 <a name="misc"/>
+
 ### Misc
 
 Underscore can be used to get the result of the last expression in the repl.
